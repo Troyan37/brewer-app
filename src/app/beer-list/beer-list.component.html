@@ -1,0 +1,26 @@
+<select class="custom-select" #brewerSelect (change)="onChooseBrewer(brewerSelect.value)">
+    <option value="" selected> Choose a brewer </option>
+    <option *ngFor="let brewer of brewers" [value]="brewer">{{brewer}}</option>
+</select>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th ></th>
+        <th >Name</th>
+        <th >Type</th>
+        <th >Price per litre</th>
+      </tr>
+    </thead>
+    <tbody>   
+          <tr *ngFor="let beer of (beers | sortBy : sortByParam)">
+            <td> <img src={{beer.image}} class="thumbnail rounded-circle" /></td>
+            <td>{{beer.name}}</td>
+            <td>{{beer.type}}</td>
+            <td>{{beer.price}}</td>
+        </tr>      
+    </tbody>
+  </table>
+
+   <button *ngIf="isMore" (click)="onLoadMoreBeers()" >Load more</button>
+
