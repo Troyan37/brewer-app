@@ -14,7 +14,7 @@
     </thead>
     <tbody>   
           <tr *ngFor="let beer of (beers | sortBy : sortByParam)">
-            <td> <img src={{beer.image}} class="thumbnail rounded-circle" /></td>
+            <td> <img src={{beer.image}} class="thumbnail rounded-circle" (click) = "open(content, beer.image)" /></td>
             <td>{{beer.name}}</td>
             <td>{{beer.type}}</td>
             <td>{{beer.price}}</td>
@@ -22,5 +22,12 @@
     </tbody>
   </table>
 
-   <button *ngIf="isMore" (click)="onLoadMoreBeers()" >Load more</button>
+   <button *ngIf="isMore" class="btn btn-dark" (click)="onLoadMoreBeers()" >Load more</button>
+
+    <ng-template #content let-modal>
+      <img src={{imageURL}} />
+    </ng-template>
+    
+
+   
 

@@ -6,21 +6,9 @@ import { BrewerDataService } from './brewer-data.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent  {
 
-  constructor(private brewerService: BrewerDataService) { }
-  
-  ngOnInit(): void {
-    // call API 
-    // this.brewerService.getBeers().subscribe(
-    //   items => {    
-    //     console.log(items);
-    //   },
-    //   error => {
-        
-    //   }
-    // );
-  }
+  constructor() { }
   
   title = 'brewer-app';
 }

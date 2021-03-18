@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OptionsService } from '../options.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private optionsService : OptionsService) { }
 
   ngOnInit(): void {
   }
+
+  onChangeSorting(param : string) {
+    this.optionsService.sortByEmitter.next(param);
+  }
+
+  onChangeAmount(amount : string) {
+    this.optionsService.listAmountEmitter.next(parseInt(amount));
+  }
+
 
 }

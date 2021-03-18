@@ -1,8 +1,9 @@
 {
-    "/beers": {
+    "/": {
       "target": "http://ontariobeerapi.ca",
-      "secure": false
-    },
-    "changeOrigin": true,
-    "logLevel": "debug"
-  }
+      "secure": false,
+      "changeOrigin": true,
+      "logLevel": "debug"
+    }
+    
+}
