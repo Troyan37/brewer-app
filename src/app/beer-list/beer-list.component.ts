@@ -1,4 +1,4 @@
-import { Component, ComponentRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { BrewerDataService } from '../brewer-data.service';
 import { LocalStorageService } from '../local-storage.service';
@@ -25,14 +25,27 @@ export class BeerListComponent implements OnInit {
   showImage : boolean = false;
   imageURL: string;
 
-  constructor(private brewerService: BrewerDataService, private optionsService : OptionsService, private localStorageService: LocalStorageService, private modalService: NgbModal) { }
+  constructor(
+    private brewerService: BrewerDataService,
+     private optionsService : OptionsService,
+      private localStorageService: LocalStorageService,
+       private modalService: NgbModal) { }
 
   ngOnInit(): void {
+
+
+    if(this.localStorageService.getItem('sortBy')) {
+      this.sortByParam = this.localStorageService.getItem('sortBy');  
+    }
+
+    if(this.localStorageService.getItem('amount')) {
+      this.listAmount = parseInt(this.localStorageService.getItem('amount'));  
+    }
 
     this.isMore = false;
     this.getBrewers();
     this.sortByParamSub = this.optionsService.sortByEmitter.subscribe(param => {
-      this.sortByParam = param;  
+      this.sortByParam = param;
     });
     this.listAmountSub = this.optionsService.listAmountEmitter.subscribe(amount => {
       this.listAmount = amount;
@@ -45,7 +58,6 @@ export class BeerListComponent implements OnInit {
     this.selectedBrewer = passedBrewer;
     this.beers.splice(0, this.beers.length);
     this.onLoadMoreBeers();
-    this.localStorageService.setItem('brewer', this.selectedBrewer);
   }
 
   onLoadMoreBeers(){
@@ -89,15 +101,12 @@ export class BeerListComponent implements OnInit {
       ); 
     }
 
-
-    closeResult = '';
     
   open(content, image) {
     this.imageURL = image;
     this.modalService.open(content);
   }
 
-  
 
     ngOnDestroy(): void {
       this.sortByParamSub.unsubscribe();
